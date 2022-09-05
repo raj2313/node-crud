@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="main">
+        <div class="h-tag">
+        <h2>Create Your Account</h2>
+        </div>
+        <div class="login">
+        <table cellspacing="2" align="center" cellpadding="8" border="0">
+        <tr>
+        <td align="right">Enter Name :</td>
+        <td><input type="text" placeholder="Enter user here" id="name" class="tb" /></td>
+        </tr>
+        <tr>
+        <td align="right">Enter Email ID :</td>
+        <td><input type="text" placeholder="Enter Email ID here" id="email" class="tb" /></td>
+        </tr>
+        <tr>
+        <td align="right">Enter Username :</td>
+        <td><input type="text" placeholder="Enter Username here" id="t3" class="tb" /></td>
+        </tr>
+        <tr>
+        <td align="right">Enter Password :</td>
+        <td><input type="password" placeholder="Enter Password here" id="t4" class="tb" /></td>
+        </tr>
+        <tr>
+        <td align="right">Enter Confirm Password :</td>
+        <td><input type="password" placeholder="Enter Password here" id="t5" class="tb" /></td>
+        </tr>
+        <tr>
+        <td></td>
+        <td>
+        <input type="reset" value="Clear Form" onclick="clearFunc()" id="res" class="btn" />
+        <input type="submit" value="Create Account" class="btn" onclick="registration()" /></td>
+        </tr>
+        </table>
+        </div>
+        <script src="demo.js"></script>
+        <script>
+            const SERVER_BASEURL = 'http://localhost:3000'
+            async function registration() {
+                const name = document.getElementById('name').value
+                console.log('Clicked-----', name)
+                const email = document.getElementById('email').value
+                const userBody = {
+                    "name": name,
+                    "email": email
+                }
+                const response = await fetch(`${SERVER_BASEURL}/user/register`, {
+                    method: 'POST',
+                    body: userBody,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                console.log('response------>', response)
+                const myJson = await response.json();
+            }
+        </script>
+</body>
+</html>
